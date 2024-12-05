@@ -16,6 +16,7 @@ public class ShoppingCartPanel {
     private ListView<Product> listViewCartContents;
 
     private Button buttonUndo;
+    private Button buttonReset;
     private GridPane gridPaneMain;
     private Button buttonAddProduct;
     private TextField textFieldProductName;
@@ -59,8 +60,9 @@ public class ShoppingCartPanel {
 
 
         buttonUndo = new Button("Undo");
+        buttonReset = new Button("Reset");
         HBox hBoxUndo = new HBox();
-        hBoxUndo.getChildren().add(buttonUndo);
+        hBoxUndo.getChildren().addAll(buttonUndo,buttonReset);
         hBoxUndo.setAlignment(Pos.CENTER_RIGHT);
         hBoxUndo.setStyle("-fx-padding: 2px 0 0 0");
         gridPaneCartContents.add(hBoxUndo, 0, 2);
@@ -93,6 +95,17 @@ public class ShoppingCartPanel {
                     }
                 }
             }
+        });
+        buttonUndo.setOnAction(e->{
+
+
+                shoppingCartController.undo();
+                updateProductCartList();
+        }
+        );
+        buttonReset.setOnAction(e->{
+            shoppingCartController.reset();
+            updateProductCartList();
         });
 
     }
